@@ -98,7 +98,7 @@
     padding-left: 20px;
 }
 .city-item:hover{
-    background-color: #d03623;
+    background-color: #FFA500;
     color: #fff;
 }
 .home .advert{
@@ -126,7 +126,7 @@
     padding: 5px;
 }
 .wishlist-icon i, .wishlist-icon-header i{
-    color: #d01212;
+    color: #FFA500;
 }
 .wishlist-icon-header i .count {
     bottom: 0.1rem;
@@ -1145,15 +1145,15 @@ html.dark .wizard-progress .wizard-steps li a span {
 
 html .wizard-progress .wizard-steps li.completed a span,
 html.dark .wizard-progress .wizard-steps li.completed a span {
-    border-color: #d01212;
-    background: #d01212;
+    border-color: #FFA500;
+    background: #FFA500;
 }
 
 html .wizard-progress .wizard-steps li.active a span,
 html.dark .wizard-progress .wizard-steps li.active a span {
     background: #FFF;
-    color: #d01212;
-    border-color: #d01212;
+    color: #FFA500;
+    border-color: #FFA500;
 }
 
 html .wizard-progress.wizard-progress-lg,
@@ -1378,7 +1378,7 @@ html.dark .form-wizard .pager .disabled > a, html.dark .form-wizard .pager .disa
     display: none !important;
 }
 html .wizard-progress .steps-progress .progress-indicator, html.dark .wizard-progress .steps-progress .progress-indicator{
-    background: #d01212;
+    background: #FFA500;
 }
 .radio-custom{
     position: relative;
