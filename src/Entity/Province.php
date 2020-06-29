@@ -50,15 +50,17 @@ class Province implements \JsonSerializable
     private $cities;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Adverts", mappedBy="province")
+     * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="province")
      */
-    private $adverts;
+    private $shops;
+
 
 
     public function __construct()
     {
         $this->cities = new ArrayCollection();
         $this->createDate = new \DateTime('now', new \DateTimeZone('Africa/Casablanca'));
+        $this->shops = new ArrayCollection();
     }
 
 
@@ -161,39 +163,6 @@ class Province implements \JsonSerializable
 
 
     /**
-     * @return Collection|Adverts[]
-     */
-    public function getAdverts(): Collection
-    {
-        return $this->adverts;
-    }
-
-    public function addAdvert(Adverts $advert): self
-    {
-        if (!$this->adverts->contains($advert)) {
-            $this->adverts[] = $advert;
-            $advert->setCity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdvert(Adverts $advert): self
-    {
-        if ($this->adverts->contains($advert)) {
-            $this->adverts->removeElement($advert);
-            // set the owning side to null (unless already changed)
-            if ($advert->getProvince() === $this) {
-                $advert->setProvince(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-
-    /**
      * Specify data which should be serialized to JSON
      * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -207,5 +176,36 @@ class Province implements \JsonSerializable
             'code' => $this->code,
             'name' => $this->name
         ];
+    }
+
+    /**
+     * @return Collection|Shop[]
+     */
+    public function getShops(): Collection
+    {
+        return $this->shops;
+    }
+
+    public function addShop(Shop $shop): self
+    {
+        if (!$this->shops->contains($shop)) {
+            $this->shops[] = $shop;
+            $shop->setProvince($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShop(Shop $shop): self
+    {
+        if ($this->shops->contains($shop)) {
+            $this->shops->removeElement($shop);
+            // set the owning side to null (unless already changed)
+            if ($shop->getProvince() === $this) {
+                $shop->setProvince(null);
+            }
+        }
+
+        return $this;
     }
 }

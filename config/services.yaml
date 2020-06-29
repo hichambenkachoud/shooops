@@ -7,7 +7,8 @@ parameters:
     locales: en|fr|ar
     uploads_directory: '%kernel.project_dir%/public/uploads/'
     uploads_directory_members: '%kernel.project_dir%/public/uploads/members/'
-    uploads_directory_agency: '%kernel.project_dir%/public/uploads/agency/'
+    uploads_directory_shop: '%kernel.project_dir%/public/uploads/shops/'
+    uploads_directory_products: '%kernel.project_dir%/public/uploads/products/'
 
 services:
     # default configuration for services in *this* file

@@ -97,11 +97,6 @@ class Members implements UserInterface, \Serializable
      */
     private $confirmationToken;
 
-    /**
-     * @var $adverts
-     * @ORM\OneToMany(targetEntity="App\Entity\Adverts", mappedBy="member")
-     */
-    private $adverts;
 
     /**
      * @var $image
@@ -121,11 +116,17 @@ class Members implements UserInterface, \Serializable
      */
     private $wishList;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="member")
+     */
+    private $shops;
+
     public function __construct()
     {
         $this->createDate = new \DateTime('now', new \DateTimeZone('Africa/Casablanca'));
         $this->enabled = false;
         $this->adverts = new ArrayCollection();
+        $this->shops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -290,37 +291,6 @@ class Members implements UserInterface, \Serializable
         $this->confirmationToken = $confirmationToken;
     }
 
-    /**
-     * @return Collection|Adverts[]
-     */
-    public function getAdverts(): Collection
-    {
-        return $this->adverts;
-    }
-
-    public function addAdvert(Adverts $advert): self
-    {
-        if (!$this->adverts->contains($advert)) {
-            $this->adverts[] = $advert;
-            $advert->setEstateType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdvert(Adverts $advert): self
-    {
-        if ($this->adverts->contains($advert)) {
-            $this->adverts->removeElement($advert);
-            // set the owning side to null (unless already changed)
-            if ($advert->getEstateType() === $this) {
-                $advert->setEstateType(null);
-            }
-        }
-
-        return $this;
-    }
-
 
 
     /**
@@ -383,7 +353,7 @@ class Members implements UserInterface, \Serializable
 
     public function isValidTel($tel)
     {
-        return preg_match("/^212(5|6|7)\d{8}$/", $tel) === 1;
+        return preg_match("/^(\S+)212(5|6|7)\d{8}$/", $tel) === 1;
     }
 
     public function isValidPassword($password)
@@ -443,6 +413,37 @@ class Members implements UserInterface, \Serializable
     public function getAllWishes(){
 
         return  json_decode($this->wishList, true);
+    }
+
+    /**
+     * @return Collection|Shop[]
+     */
+    public function getShops(): Collection
+    {
+        return $this->shops;
+    }
+
+    public function addShop(Shop $shop): self
+    {
+        if (!$this->shops->contains($shop)) {
+            $this->shops[] = $shop;
+            $shop->setMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShop(Shop $shop): self
+    {
+        if ($this->shops->contains($shop)) {
+            $this->shops->removeElement($shop);
+            // set the owning side to null (unless already changed)
+            if ($shop->getMember() === $this) {
+                $shop->setMember(null);
+            }
+        }
+
+        return $this;
     }
 
 

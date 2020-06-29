@@ -13,43 +13,37 @@
                 <li class="city-item">fas</li>
             </ul>
         </div>
-        <li style="list-style-type: none;padding: 2px 0;">
-            <div class="dropdown-mega-content mt-3 ml-3 mr-3">
-                <form id="propertiesFormHeader" action="{{ path('search-advert-home') }}"
+        <li style="list-style-type: none;padding: 0 0 10px 0;">
+            <div class="dropdown-mega-content mt-3 ml-3 mr-3 search-home-shops">
+                <form id="propertiesFormHeader" action="{{ path('search_shops_sub_category_city') }}"
                       method="GET">
                     <div class="container p-0">
                         <div class="form-row {% if app.request.locale == 'ar' %} arabe-home {% endif %}">
-                            <div class="col-lg-3 col-md-3 col-sm-12 mb-1">
-                                <!--<select data-plugin-selectTwo class="form-control form-control-lg text-uppercase text-3 populate"
-                                        name="adverts[type]"
-                                        data-msg-required="This field is required."
-                                        id="adverts-type">
-                                    {% for advertType in advertTypes %}
-                                        <option value="{{ advertType.id }}" data-code="{{ advertType.code|lower }}">{{ advertType.code|lower|trans }}</option>
-                                    {% endfor %}
-                                </select>-->
-                                <div class="new-radio-button">
-                                    {% for advertType in advertTypes %}
-                                        <input name="advertType" id="free-search-operation-{{ advertType.code }}" type="radio" {% if advertType.code == 'sell'  %} checked {% endif %}
-                                               value="{{ advertType.id }}" autocomplete="off" data-code="{{ advertType.code|lower }}">
-                                        <label for="free-search-operation-{{ advertType.code }}" title="{{ advertType.code|lower|trans }}"> {{ advertType.code|lower|trans }} </label>
-                                    {% endfor %}
-                                </div>
-
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 mb-1">
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-1">
                                 <select data-plugin-selectTwo class="form-control form-control-lg text-uppercase text-3 populate"
-                                        name="estateType"
-                                        data-msg-required="This field is required."
-                                        id="estate-type">
-                                    {% for estateType in estateTypes %}
-                                        <option value="{{ estateType.id }}">{{ estateType.code|lower|trans }}</option>
+                                        name="category"
+                                        id="category" required>
+                                    <option value="">{{ "front.city.quartier"|trans }}</option>
+                                    {% for category in categories %}
+                                        {% if category.subCategories|length > 0 %}
+                                            <optgroup label="{{ category.code|lower|trans }}">
+                                                {% for subCategory in category.subCategories %}
+                                                    {% if subCategory.enabled %}
+                                                        <option value="{{ subCategory.code }}" data-code="{{ subCategory.code|lower }}" data-category="{{ category.code|lower }}">{{ subCategory.code|lower|trans }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </optgroup>
+                                        {% else %}
+                                        <optgroup label="{{ category.code|lower|trans }}">
+                                            <option value="{{ category.code }}" data-code="{{ category.code|lower }}">{{ category.code|lower|trans }}</option>
+                                        </optgroup>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12 mb-1">
                                 <input type="text" class="form-control text-uppercase text-3" id="search-city"
-                                       placeholder="{{ 'front.city.quartier'|trans }}" autocomplete="off">
+                                       placeholder="{{ 'front.search.shop'|trans }}" autocomplete="off" required>
                                 <input type="hidden" name="obj" id="input-obj" value="">
                                 <input type="hidden" name="city" id="input-city" value="">
                             </div>

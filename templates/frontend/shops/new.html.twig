@@ -1,0 +1,557 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title'|trans }} - {{ 'front.shop.add'|trans }}{% endblock %}
+
+{% block metas %}
+    <meta name="title" content="{{ 'front.shop.add'|trans }}">
+    <meta name="description" content="{{ 'front.shop.add'|trans }}">
+    <meta property="og:title" content="{{ 'front.shop.add'|trans }}">
+    <meta name="keywords" content="{{ 'front.shop.add'|trans }}">
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://js.hereapi.cn/v3/3.0/mapsjs-ui.css" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-fileinput/fileinput.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-tagsinput.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .krajee-default .file-caption-info, .krajee-default .file-size-info{
+            height: 20px;
+        }
+        .fileinput-remove,
+        .fileinput-upload{
+            display: none;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div role="main" class="main">
+
+        <section class="page-header page-header-classic">
+            <div class="container">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col p-static">
+                        <h1 data-title-border>{{ 'front.shop.add'|trans }}</h1>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <section class="card form-wizard" id="w4">
+                        <header class="card-header">
+                        </header>
+                        <div class="card-body new-advert">
+                            <div class="form-group mb-4">
+                                {{ include('frontend/includes/include-flash.html.twig') }}
+                            </div>
+                            <div class="wizard-progress wizard-progress-lg">
+                                <div class="steps-progress">
+                                    <div class="progress-indicator"></div>
+                                </div>
+                                <ul class="nav wizard-steps">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#w4-image" data-toggle="tab"><span>1</span>{{ 'front.shop.image.emplacement' |trans }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#w4-description" data-toggle="tab"><span>2</span>{{ 'front.description' |trans }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <form action="{{ path('new_shop') }}" class="form-horizontal p-3" novalidate="novalidate" id="advert-form" method="post" enctype="multipart/form-data">
+                                <div class="tab-content">
+                                    <div id="w4-image" class="tab-pane">
+                                        <div class="form-group">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <span class="card-title">{{ 'front.emplacement'|trans }}</span>
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group" id="address">
+                                                            <label class="required">{{ 'front.address'|trans }}</label>
+                                                            <input type="text" name="shops[address]" class="form-control" id="address" required>
+                                                            <input type="hidden" name="shops[longitude]" id="longitude">
+                                                            <input type="hidden" name="shops[latitude]" id="latitude">
+                                                        </div>
+                                                        <div class="form-group" id="region-list">
+                                                            <label class="required">{{ 'front.region'|trans }}</label>
+                                                            <select name="shops[region]" class="form-control populate" data-plugin-selectTwo id="regions" required>
+                                                                <option>{{ 'front.choose.option'|trans }}</option>
+                                                                {% for region in regions %}
+                                                                    <option value="{{ region.id }}" data-code="{{ region.code }}">{{ region.code|trans }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" id="province-list">
+                                                            <label class="required">{{ 'front.province'|trans }}</label>
+                                                            <select name="shops[province]" class="form-control" class="form-control populate" data-plugin-selectTwo id="provinces" disabled>
+                                                                <option>{{ 'front.choose.option'|trans }}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" id="city-list">
+                                                            <label class="required">{{ 'front.city'|trans }}</label>
+                                                            <select name="shops[city]" class="form-control" class="form-control populate" data-plugin-selectTwo id="cities" disabled>
+                                                                <option>{{ 'front.choose.option'|trans }}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" id="quartier-list">
+                                                            <label class="required">{{ 'front.quartier'|trans }}</label>
+                                                            <select name="shops[quartier]" class="form-control" class="form-control populate" data-plugin-selectTwo id="quartiers" disabled>
+                                                                <option>{{ 'front.choose.option'|trans }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div style="width: 540px; height: 380px; float: right;" id="mapContainer"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <span class="card-title">{{ 'front.images'|trans }}</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <div class="file-loading">
+                                                            <input id="Image" name="shooops[]" type="file" class="file" multiple required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="w4-description" class="tab-pane">
+                                       <div class="row">
+                                           <div class="col-sm-6 mb-4">
+                                               <div class="card card-info">
+                                                   <div class="card-header">
+                                                       <span class="card-title required">{{ "front.description"|trans }}</span>
+                                                   </div>
+                                                   <div class="card-body">
+                                                      <div class="form-group">
+                                                          <textarea class="form-control" required id="description" name="shops[description]"></textarea>
+                                                      </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-6 mb-4">
+                                               <div class="card card-info">
+                                                   <div class="card-header">
+                                                       <span class="card-title required">{{ "front.title"|trans }}</span>
+                                                   </div>
+                                                   <div class="card-body">
+                                                       <div class="form-group">
+                                                           <input type="text" name="shops[title]" id="title" required class="form-control">
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-6 mb-4">
+                                               <div class="card card-info">
+                                                   <div class="card-header">
+                                                       <span class="card-title required">{{ "front.keywords"|trans }}</span>
+                                                   </div>
+                                                   <div class="card-body">
+                                                       <div class="form-group">
+                                                           <input type="text" name="shops[keywords]" id="keywords" required class="form-control" data-role="tagsinput">
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-6 mb-4">
+                                               <div class="card card-info">
+                                                   <div class="card-header">
+                                                       <span class="card-title required">{{ "front.seo.description"|trans }}</span>
+                                                   </div>
+                                                   <div class="card-body">
+                                                       <div class="form-group">
+                                                           <textarea type="text" name="shops[seoDescription]" id="seoDescription" required class="form-control" maxlength="155"></textarea>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               <div class="card card-info">
+                                                   <div class="card-header">
+                                                       <span class="card-title required">{{ "front.contact"|trans }}</span>
+                                                   </div>
+                                                   <div class="card-body">
+                                                       <div class="form-group">
+                                                           <input type="tel" class="form-control telephone" id="tel" required minlength="8" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                                           <input type="hidden" name="shops[tel]" id="shopsTel" required>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-4">
+                                               <div class="card card-info">
+                                                   <div class="card-header">
+                                                       <span class="card-title required">{{ "front.contact"|trans }}</span>
+                                                   </div>
+                                                   <div class="card-body">
+                                                       <div class="form-group">
+                                                           <input type="tel" class="form-control telephone" id="whatsapp" required minlength="8" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                                           <input type="hidden" name="shops[whatsapp]" id="shopsWhatsapp" required>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="pager">
+                                <li class="previous disabled">
+                                    <a><i class="fas fa-angle-{{ app.request.locale == 'ar' ? 'right' : 'left' }}"></i> {{ 'front.previous'|trans }}</a>
+                                </li>
+                                <li class="finish hidden float-right">
+                                    <a>{{ 'front.finish'|trans }}</a>
+                                </li>
+                                <li class="next">
+                                    <a>{{ 'front.next'|trans }} <i class="fas fa-angle-{{ app.request.locale == 'ar' ? 'left' : 'right' }}"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/bootstrap-fileinput/fileinput.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-fileinput/theme.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-fileinput/bootstrap-tagsinput.js') }}"></script>
+    <script src="{{ asset('js/jquery.bootstrap.wizard.js') }}"></script>
+    <script src="{{ asset('js/examples.wizard.js') }}"></script>
+
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+    {% if app.request.locale == 'ar' %}
+        <script src="{{ asset('js/bootstrap-fileinput/ar.js') }}"></script>
+    {% elseif app.request.locale == 'fr' %}
+        <script src="{{ asset('js/bootstrap-fileinput/fr.js') }}"></script>
+    {% endif %}
+
+    <script type="text/javascript">
+        $('.chooseIcon').on("click", function (event) {
+            let iconDiv = $($(this)).children(".estate-icon-show");
+            let checkbox = $($(this)).children(".character");
+            if (iconDiv.hasClass('active')){
+                iconDiv.removeClass('active');
+                checkbox.prop("checked", false);
+            }else{
+                iconDiv.addClass('active');
+                checkbox.prop("checked", true);
+            }
+        });
+
+        $("#Image").fileinput({
+            theme: 'fa',
+            language: '{{ app.request.locale }}',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'jpeg'],
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+
+
+        $('#tel.telephone').on('keyup',function () {
+            let indicative = $('#w4-description .iti__selected-dial-code').text();
+            let $val = $(this).val();
+
+            $('#shopsTel').val(indicative+$val);
+        });
+
+        $('#whatsapp.telephone').on('keyup',function () {
+            let indicative = $('#w4-description .iti__selected-dial-code').text();
+            let $val = $(this).val();
+
+            $('#shopsWhatsapp').val(indicative+$val);
+        });
+
+    </script>
+
+    <script>
+
+        // Initialize the platform object:
+        var platform = new H.service.Platform({
+            'apikey': 'bXdx-YJ9AP7p8kKKn3_xNxDFd9PqttfQzJ5W39fS4c8'
+        });
+
+        var maptypes = platform.createDefaultLayers();
+        var map = new H.Map(
+            document.getElementById('mapContainer'),
+            maptypes.vector.normal.map,
+            {
+                zoom: 6,
+                center: { lng: -7.603869, lat: 33.589886 },
+                pixelRatio: window.devicePixelRatio || 1
+            }
+        );
+
+        var Marker = new H.map.Marker({lat:33.589886, lng:-7.603869});
+        map.addObject(Marker);
+
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, maptypes, 'fr-FR');
+        // Instantiate (and display) a map object:
+
+        function displayMap(longitude = 0, latitude = 0) {
+            map.removeObjects(map.getObjects ())
+            var group = new  H.map.Group(),
+                position,
+                i;
+
+            position = {
+                lat: latitude,
+                lng: longitude
+            };
+
+
+
+
+            marker = new H.map.Marker(position);
+            group.addObject(marker);
+
+            group.addEventListener('tap', function (evt) {
+                map.setCenter(evt.target.getGeometry());
+                openBubble(
+                    evt.target.getGeometry(), evt.target.label);
+            }, false);
+
+            // Add the locations group to the map
+            map.addObject(group);
+            map.setCenter(group.getBoundingBox().getCenter());
+        }
+
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+           //get provinces of region
+           $('#regions').on('change', function () {
+              let region = $(this).val();
+               getLongAndLatByState( $(this).children("option:selected").html());
+              let provinceSelect = $('#provinces');
+              let provinceDev = $('#province-list');
+               $('#city-list').prop('disabled', true);
+               $('#quartier-list').prop('disabled', true);;
+               $.ajax({
+                   url: "{{ path('ajax_get_province_of_region') }}",
+                   data: JSON.stringify({region: region}),
+                   dataType: "json",
+                   method : "POST",
+                   contentType: 'application/json',
+                   success: function (data) {
+                       if (data.response.provinces.length > 0){
+                           provinceDev.show();
+                           provinceSelect.prop('disabled', false);
+                           provinceSelect.prop('required', true);
+                           provinceSelect.html('<option value="">{{ 'front.choose.option'|trans }}</option>');
+                           $.each(data.response.provinces, function ($i, $v) {
+                               provinceSelect.append('<option value="' + $v["id"] + '" data-code='+$v["name"]+'">' + $v["code"] + '</option>');
+                           });
+                       }
+
+                   },
+                   error: function (a, b, c) {
+                       console.log(a, b, c);
+                   },
+                   complete:function () {
+                   }
+               });
+           });
+
+           //get quartier of city
+           $('#cities').on('change', function () {
+              let city = $(this).val();
+               getLongAndLatByCity($(this).children("option:selected").html());
+              let quartierSelect = $('#quartiers');
+              let quartierDev = $('#quartier-list');
+               $.ajax({
+                   url: "{{ path('ajax_get_quartier_of_city') }}",
+                   data: JSON.stringify({city: city}),
+                   dataType: "json",
+                   method : "POST",
+                   contentType: 'application/json',
+                   success: function (data) {
+                       if (data.response.quartiers.length > 0){
+                           quartierDev.show();
+                           quartierSelect.prop('disabled', false);
+                           quartierSelect.prop('required', true);
+                           quartierSelect.html('<option value="">{{ 'front.choose.option'|trans }}</option>');
+                           $.each(data.response.quartiers, function ($i, $v) {
+                               quartierSelect.append('<option value="' + $v["id"] + '" data-code='+$v["name"]+'">' + $v["code"] + '</option>');
+                           });
+                       }else{
+                           quartierDev.hide();
+                       }
+
+                   },
+                   error: function (a, b, c) {
+                       console.log(a, b, c);
+                   },
+                   complete:function () {
+                   }
+               });
+           });
+
+           //get city of province
+           $('#provinces').on('change', function () {
+              let province = $(this).val();
+              let citySelect = $('#cities');
+              let cityDev = $('#city-list');
+               let quartiereDev = $('#quartier-list');
+               getLongAndLatByCity($(this).children("option:selected").html());
+               $.ajax({
+                   url: "{{ path('ajax_get_city_of_province') }}",
+                   data: JSON.stringify({province: province}),
+                   dataType: "json",
+                   method : "POST",
+                   contentType: 'application/json',
+                   success: function (data) {
+                       if (data.response.cities.length > 0){
+                           cityDev.show();
+                           citySelect.prop('disabled', false);
+                           citySelect.prop('required', true);
+                           citySelect.html('<option value="">{{ 'front.choose.option'|trans }}</option>');
+                           $.each(data.response.cities, function ($i, $v) {
+                               citySelect.append('<option value="' + $v["id"] + '" data-code='+$v["name"]+'">' + $v["code"] + '</option>');
+                           });
+                       }else{
+                           cityDev.hide();
+                           quartiereDev.hide();
+                       }
+
+                   },
+                   error: function (a, b, c) {
+                       console.log(a, b, c);
+                   },
+                   complete:function () {
+                   }
+               });
+           });
+
+
+            $('#quartiers').on('change', function () {
+                getLongAndLatByQuartier($(this).children("option:selected").html());
+            });
+
+           //sent
+            $('.finish').on('click', function () {
+               let form = $('#advert-form');
+
+               if (form.valid()){
+                   form.submit();
+               }
+            });
+
+            //go to
+            $('.next, .previous').on('click', function () {
+               $('.card-body')[0].scrollIntoView();
+            });
+
+
+            function getLongAndLatByCity(city) {
+                $.ajax({
+                    url: 'https://geocoder.ls.hereapi.com/6.2/geocode.json',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    async: false,
+                    jsonp: 'jsoncallback',
+                    data: {
+                        city: city,
+                        Country: 'MAR',
+                        apiKey: 'bXdx-YJ9AP7p8kKKn3_xNxDFd9PqttfQzJ5W39fS4c8'
+                    },
+                    success: function (data) {
+                        //data = JSON.stringify(data);
+                        let $lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+                        let $lng = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+                        $('#latitude').val($lat);
+                        $('#longitude').val($lng);
+
+                        displayMap($lng, $lat)
+                    }
+                });
+
+            }
+            function getLongAndLatByState(state) {
+                $.ajax({
+                    url: 'https://geocoder.ls.hereapi.com/6.2/geocode.json',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    async: false,
+                    jsonp: 'jsoncallback',
+                    data: {
+                        State: state,
+                        apiKey: 'bXdx-YJ9AP7p8kKKn3_xNxDFd9PqttfQzJ5W39fS4c8'
+                    },
+                    success: function (data) {
+                        let $lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+                        let $lng = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+                        $('#latitude').val($lat);
+                        $('#longitude').val($lng);
+
+                        displayMap($lng, $lat)
+                    }
+                });
+            }
+            function getLongAndLatByQuartier(quartier) {
+                $.ajax({
+                    url: 'https://geocoder.ls.hereapi.com/6.2/geocode.json',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    async: false,
+                    jsonp: 'jsoncallback',
+                    data: {
+                        Street: quartier,
+                        apiKey: 'bXdx-YJ9AP7p8kKKn3_xNxDFd9PqttfQzJ5W39fS4c8',
+                        Country: 'MAR'
+                    },
+                    success: function (data) {
+                        let $lat = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+                        let $lng = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+                        $('#latitude').val($lat);
+                        $('#longitude').val($lng);
+
+                        displayMap($lng, $lat)
+                    }
+                });
+            }
+
+        });
+    </script>
+{% endblock %}

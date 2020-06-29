@@ -4,17 +4,15 @@
 namespace App\Controller;
 
 
-use App\Entity\Adverts;
-use App\Entity\AdvertType;
-use App\Entity\City;
-use App\Entity\EstateStatus;
-use App\Entity\EstateType;
+use App\Entity\Category;
 use App\Entity\Members;
+use App\Entity\Products;
 use App\Entity\Province;
+use App\Entity\Shop;
+use App\Entity\SubCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -40,29 +38,27 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        $advertTypes = $this->entityManager->getRepository(AdvertType::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
-        $estateTypes = $this->entityManager->getRepository(EstateType::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
-        $estateStatus = $this->entityManager->getRepository(EstateStatus::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
+        $categories = $this->entityManager->getRepository(Category::class)->findBySubCategories();
+        $products = $this->entityManager->getRepository(Products::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
 
         //last 6 adverts
-        $adverts = $this->entityManager->getRepository(Adverts::class)->findBy(['valid'=>true], ['title' => 'ASC'], 10);
+        $shops = $this->entityManager->getRepository(Shop::class)->findBy(['validated'=>true], ['name' => 'ASC'], 10);
         $members = $this->entityManager->getRepository(Members::class)->getAgents();
 
         //special adverts
-        $specialAdvert = $this->entityManager->getRepository(Adverts::class)->findOneSpecial();
+        $specialShop = $this->entityManager->getRepository(Shop::class)->find(1);
 
         //var_dump($specialAdvert);die();
         $provinces = $this->entityManager->getRepository(Province::class)->findBySomeIds();
 
         return $this->render('frontend/static/index.html.twig',
            [
-               'advertTypes' => $advertTypes,
-               'estateTypes' => $estateTypes,
-               'estateStatus' => $estateStatus,
-               'adverts' => $adverts,
+               'categories' => $categories,
+               'products' => $products,
+               'shops' => $shops,
                'members' => $members,
                'cities' => $provinces,
-               'specialAdvert' => $specialAdvert
+               'specialShop' => $specialShop
            ]);
     }
 

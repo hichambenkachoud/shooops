@@ -37,7 +37,7 @@
                         <aside class="sidebar mt-2" id="sidebar">
                             <ul class="nav nav-list flex-column mb-5">
                                 <li class="nav-item"><a class="nav-link text-dark active" href="{{ path('front_security_profile') }}">{{ 'front.myinfo'|trans }}</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ path('front_profile_adverts') }}">{{ 'front.my_adverts'|trans }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('front_profile_shops') }}">{{ 'front.my_shops'|trans }}</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ path('front_profile_wishes') }}">{{ 'front.wish.list'|trans }}</a></li>
                             </ul>
                         </aside>
@@ -55,7 +55,7 @@
                             <p class="mb-0"></p>
                         </div>
 
-                        <form method="post" class="needs-validation">
+                        <form method="post" class="needs-validation profile">
                             <div class="form-group">
                                 <div class="alert alert-danger" id="errors_div_profile" style="display: none;">
 
@@ -93,7 +93,7 @@
                                 <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">{{ 'front.mobilenumber'|trans }}</label>
                                 <div class="col-lg-9">
                                     <input class="form-control telephone" type="text" required>
-                                    <input id="tel" name="tel" type="hidden" value="{{ app.user.mobileNumber }}" placeholder="212(5|6|7)66873678" required>
+                                    <input id="tel" name="tel" type="hidden" value="{{ app.user.mobileNumber }}" placeholder="212(5|6|7)66873678" required minlength="8" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -138,9 +138,9 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            $('.telephone').val({{ app.user.mobileNumber }});
+            $('.telephone').val({{ app.user.mobileNumber|slice(4, app.user.mobileNumber|length) }});
             $('.telephone').on('keyup',function () {
-                let indicative = $('#w4-description .iti__selected-dial-code').text();
+                let indicative = $('.profile .iti__selected-dial-code').text();
                 let $val = $(this).val();
 
                 $('#tel').val(indicative+$val);
@@ -219,7 +219,7 @@
                 var ext = name.split('.').pop().toLowerCase();
                 if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1)
                 {
-                    alert({{ 'front.image.bad.format'|trans }});
+                    alert("{{ 'front.image.bad.format'|trans }}");
                 }
                 var oFReader = new FileReader();
                 oFReader.readAsDataURL(document.getElementById("file").files[0]);

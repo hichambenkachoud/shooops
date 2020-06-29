@@ -1,0 +1,328 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title'|trans }} - {{ 'front.update'|trans }} {{ 'front.products'|trans }} {% endblock %}
+
+{% block metas %}
+    <meta name="title" content="{{ 'title'|trans }} - {{ 'front.update'|trans }} {{ 'front.products'|trans }}">
+    <meta name="description" content="{{ shop.seoDescription|trans }}">
+    <meta property="og:title" content="{{ 'title'|trans }} - {{ 'front.update'|trans }} {{ 'front.products'|trans }}">
+    <meta name="keywords" content="{{ shop.keywords|trans }}">
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://js.hereapi.cn/v3/3.0/mapsjs-ui.css" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-fileinput/fileinput.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-tagsinput.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .krajee-default .file-caption-info, .krajee-default .file-size-info{
+            height: 20px;
+        }
+        .fileinput-remove,
+        .fileinput-upload{
+            display: none;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div role="main" class="main">
+
+        <section class="page-header page-header-classic">
+            <div class="container">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col p-static">
+                        <h1 data-title-border>{{ 'front.update'|trans }} {{ 'front.products'|trans }}</h1>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container py-2">
+
+            <div class="row">
+                <div class="col-lg-3 mt-4 mt-lg-0">
+
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="profile-image-outer-container">
+                            <div class="profile-image-inner-container bg-color-primary">
+                                <img src="{{ asset('uploads/members/'~app.user.image) }}" id="picture">
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="sidebar mt-2" id="sidebar">
+                        <ul class="nav nav-list flex-column mb-5">
+                            <li class="nav-item"><a class="nav-link" href="{{ path('front_security_profile') }}">{{ 'front.myinfo'|trans }}</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark active" href="{{ path('front_profile_shops') }}">{{ 'front.my_shops'|trans }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('front_profile_wishes') }}">{{ 'front.wish.list'|trans }}</a></li>
+                        </ul>
+                    </aside>
+
+                </div>
+                <div class="col-lg-9 col-md-9" id="response">
+                    <section class="card form-wizard" id="w4">
+                        <header class="card-header">
+                        </header>
+                        <div class="card-body new-advert">
+                            <div class="form-group mb-4">
+                                {{ include('frontend/includes/include-flash.html.twig') }}
+                            </div>
+                            <div class="wizard-progress wizard-progress-lg">
+                                <div class="steps-progress">
+                                    <div class="progress-indicator"></div>
+                                </div>
+                                <ul class="nav wizard-steps">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#w3-image" data-toggle="tab"><span>1</span>{{ 'front.categories' |trans }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#w4-image" data-toggle="tab"><span>2</span>{{ 'front.description' |trans }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#w4-description" data-toggle="tab"><span>3</span>{{ 'front.shop.image.emplacement' |trans }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <form action="{{ path('profile_update_product', {id: product.id}) }}" class="form-horizontal p-3" novalidate="novalidate" id="advert-form" method="post" enctype="multipart/form-data">
+                                <div class="tab-content">
+
+                                    <div id="w3-image" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-4">
+                                                <div class="card card-info">
+                                                    <div class="card-header">
+                                                        <span class="card-title required">{{ "front.categories"|trans }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                           <select  data-plugin-selectTwo class="form-control populate" name="products[category]" required id="category">
+                                                               <option value="">{{ 'front.choose.option'|trans }}</option>
+                                                               {% for category in categories %}
+                                                                   <option value="{{ category.id }}" {% if category.id == product.category.id %} selected {% endif %}> {{ category.code|lower|trans }}</option>
+                                                               {% endfor %}
+                                                           </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 mb-4">
+                                                <div class="card card-info">
+                                                    <div class="card-header">
+                                                        <span class="card-title required">{{ "front.subcategories"|trans }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <select  data-plugin-selectTwo class="form-control populate" name="products[subcategory]" required id="subcategory" {% if not product.subCategory %}disabled{% endif %}>
+                                                                <option value="">{{ 'front.choose.option'|trans }}</option>
+                                                                {% for subCategory in subCategories %}
+                                                                    <option value="{{ subCategory.id }}" {% if subCategory.id == product.subCategory.id %} selected {% endif %}> {{ subCategory.code|lower|trans }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="w4-image" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-4">
+                                                <div class="card card-info">
+                                                    <div class="card-header">
+                                                        <span class="card-title required">{{ "front.description"|trans }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" required id="description" name="products[description]">{{ product.description|striptags|raw }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 mb-4">
+                                                <div class="card card-info">
+                                                    <div class="card-header">
+                                                        <span class="card-title required">{{ "front.seo.description"|trans }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <textarea type="text" name="products[seoDescription]" id="seoDescription" required class="form-control" maxlength="155">{{ product.seoDescription|striptags|raw }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 mb-4">
+                                                <div class="card card-info">
+                                                    <div class="card-header">
+                                                        <span class="card-title required">{{ "front.title"|trans }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <input type="text" name="products[name]" id="name" required class="form-control" value="{{ product.name|striptags|raw }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 mb-4">
+                                                <div class="card card-info">
+                                                    <div class="card-header">
+                                                        <span class="card-title required">{{ "front.price"|trans }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" name="products[price]" id="price" value="{{ product.price }}"
+                                                                   aria-label="{{ 'front.price'|trans }}" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">{{ 'front.currency.dh'|trans }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="w4-description" class="tab-pane">
+                                        <div class="form-group">
+                                            <div class="card card-info">
+                                                <div class="card-header">
+                                                    <span class="card-title">{{ 'front.images'|trans }}</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <div class="file-loading">
+                                                            <input id="Image" name="prooducts[]" type="file" class="file" multiple>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="pager">
+                                <li class="previous disabled">
+                                    <a><i class="fas fa-angle-{{ app.request.locale == 'ar' ? 'right' : 'left' }}"></i> {{ 'front.previous'|trans }}</a>
+                                </li>
+                                <li class="finish hidden float-right">
+                                    <a>{{ 'front.finish'|trans }}</a>
+                                </li>
+                                <li class="next">
+                                    <a>{{ 'front.next'|trans }} <i class="fas fa-angle-{{ app.request.locale == 'ar' ? 'left' : 'right' }}"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/bootstrap-fileinput/fileinput.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-fileinput/theme.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-fileinput/bootstrap-tagsinput.js') }}"></script>
+    <script src="{{ asset('js/jquery.bootstrap.wizard.js') }}"></script>
+    <script src="{{ asset('js/examples.wizard.js') }}"></script>
+
+    {% if app.request.locale == 'ar' %}
+        <script src="{{ asset('js/bootstrap-fileinput/ar.js') }}"></script>
+    {% elseif app.request.locale == 'fr' %}
+        <script src="{{ asset('js/bootstrap-fileinput/fr.js') }}"></script>
+    {% endif %}
+
+    <script type="text/javascript">
+        $("#Image").fileinput({
+            theme: 'fa',
+            language: '{{ app.request.locale }}',
+            uploadUrl: '#',
+            minFileCount: 1,
+            validateInitialCount: true,
+            showUpload: false,
+            allowedFileExtensions: ['jpg', 'png', 'jpeg'],
+            initialPreview: [
+                {% for image in images %}
+                '<img src="{{ asset('uploads/products/'~product.images~'/'~image) }}" class="img-update" >',
+                {% endfor %}
+            ],
+            initialPreviewConfig: [
+                {% for image in images %}
+                {caption: '{{ image }}', url: "{{ path('ajax_delete_img', {id: product.id}) }}", key: '{{ image }}' },
+                {% endfor %}
+
+            ],
+            overwriteInitial: false,
+            initialPreviewShowDelete: true,
+            deleteUrl: "{{ path('ajax_delete_img', {id: product.id}) }}",
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //sent
+            $('.finish').on('click', function () {
+                let form = $('#advert-form');
+
+                if (form.valid()){
+                    form.submit();
+                }
+            });
+
+            //go to
+            $('.next, .previous').on('click', function () {
+                $('.card-body')[0].scrollIntoView();
+            });
+        });
+
+        $('#category').on('change', function (e) {
+           let $category = $(this).children('option:selected').val();
+           let $subCategoryList = $('#subcategory');
+            $subCategoryList.html(' ');
+            $subCategoryList.html('<option value="">{{ 'front.choose.option'|trans }}</option>');
+            $subCategoryList.prop('disabled', true);
+            $.ajax({
+                url: "{{ path('ajax_get_subcategory_by_category') }}",
+                data: JSON.stringify({category: $category}),
+                dataType: "json",
+                method : "POST",
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.response.subcategories.length > 0){
+                        $subCategoryList.prop('disabled', false);
+                        $.each(data.response.subcategories, function ($i, $v) {
+                            $subCategoryList.append('<option value="' + $v["id"] + '" data-code='+$v["name"]+'">' + $v["code"] + '</option>');
+                        });
+                    }
+
+                },
+                error: function (a, b, c) {
+                    console.log(a, b, c);
+                },
+                complete:function () {
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+{% endblock %}

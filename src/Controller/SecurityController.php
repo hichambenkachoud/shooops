@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Category;
 use App\Entity\Members;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,8 +51,10 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $categories = $this->entityManager->getRepository(Category::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
         return $this->render('frontend/security/login.html.twig', [
             'last_username' => $lastUsername,
+            'categories' => $categories,
             'error' => $error
         ]);
     }
@@ -88,8 +91,11 @@ class SecurityController extends AbstractController
             }
 
         }
+
+        $categories = $this->entityManager->getRepository(Category::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
         return $this->render('frontend/security/register.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $categories,
         ]);
     }
 
@@ -112,7 +118,8 @@ class SecurityController extends AbstractController
             $this->addFlash('error', $this->trans->trans('front.register.confirmation.failed'));
         }
 
-        return $this->render('frontend/security/confirmation.html.twig');
+        $categories = $this->entityManager->getRepository(Category::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
+        return $this->render('frontend/security/confirmation.html.twig', ['categories' => $categories,]);
     }
 
     /**
@@ -121,7 +128,8 @@ class SecurityController extends AbstractController
      */
     public function forgetPassword()
     {
-        return $this->render('frontend/security/forgetPassword.html.twig');
+        $categories = $this->entityManager->getRepository(Category::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
+        return $this->render('frontend/security/forgetPassword.html.twig', ['categories' => $categories,]);
     }
     /**
      * @param $token
@@ -139,7 +147,8 @@ class SecurityController extends AbstractController
         }else{
             $this->addFlash('error', $this->trans->trans('front.password.reset.failed'));
         }
-        return $this->render('frontend/security/resetPassword.html.twig', ['token' => $token, 'valid' => $valid]);
+        $categories = $this->entityManager->getRepository(Category::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
+        return $this->render('frontend/security/resetPassword.html.twig', ['token' => $token, 'valid' => $valid, 'categories' => $categories,]);
     }
 
     /**
@@ -148,7 +157,8 @@ class SecurityController extends AbstractController
      */
     public function profile()
     {
-        return $this->render('frontend/security/profile.html.twig');
+        $categories = $this->entityManager->getRepository(Category::class)->findBy(['enabled'=>true], ['name' => 'ASC']);
+        return $this->render('frontend/security/profile.html.twig', ['categories' => $categories,]);
     }
 
     /**

@@ -50,21 +50,17 @@ class City implements \JsonSerializable
      */
     private $quartiers;
 
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Adverts", mappedBy="city")
+     * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="city")
      */
-    private $adverts;
+    private $shops;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Agency", mappedBy="city")
-     */
-    private $agencies;
 
     public function __construct()
     {
         $this->quartiers = new ArrayCollection();
         $this->createDate = new \DateTime('now', new \DateTimeZone('Africa/Casablanca'));
+        $this->shops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,71 +162,6 @@ class City implements \JsonSerializable
 
 
     /**
-     * @return Collection|Adverts[]
-     */
-    public function getAdverts(): Collection
-    {
-        return $this->adverts;
-    }
-
-    public function addAdvert(Adverts $advert): self
-    {
-        if (!$this->adverts->contains($advert)) {
-            $this->adverts[] = $advert;
-            $advert->setCity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdvert(Adverts $advert): self
-    {
-        if ($this->adverts->contains($advert)) {
-            $this->adverts->removeElement($advert);
-            // set the owning side to null (unless already changed)
-            if ($advert->getCity() === $this) {
-                $advert->setCity(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-
-    /**
-     * @return Collection|Agency[]
-     */
-    public function getAgency(): Collection
-    {
-        return $this->agencies;
-    }
-
-    public function addAgency(Agency $agency): self
-    {
-        if (!$this->agencies->contains($agency)) {
-            $this->agencies[] = $agency;
-            $agency->setCity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAgency(Agency $agency): self
-    {
-        if ($this->agencies->contains($agency)) {
-            $this->agencies->removeElement($agency);
-            // set the owning side to null (unless already changed)
-            if ($agency->getCity() === $this) {
-                $agency->setCity(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-    /**
      * Specify data which should be serialized to JSON
      * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -244,5 +175,36 @@ class City implements \JsonSerializable
           'code' => $this->code,
           'name' => $this->code
         ];
+    }
+
+    /**
+     * @return Collection|Shop[]
+     */
+    public function getShops(): Collection
+    {
+        return $this->shops;
+    }
+
+    public function addShop(Shop $shop): self
+    {
+        if (!$this->shops->contains($shop)) {
+            $this->shops[] = $shop;
+            $shop->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShop(Shop $shop): self
+    {
+        if ($this->shops->contains($shop)) {
+            $this->shops->removeElement($shop);
+            // set the owning side to null (unless already changed)
+            if ($shop->getCity() === $this) {
+                $shop->setCity(null);
+            }
+        }
+
+        return $this;
     }
 }

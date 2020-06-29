@@ -74,55 +74,38 @@
                             </li>
                         </ul>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="fas fa-tasks" aria-hidden="true"></i>
-                            <span>{{ 'admin.adverts' | trans }}</span>
+                            <span>{{ 'admin.shops' | trans }}</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a class="nav-link" href="{{ path('adverts_index') }}">
-                                    {{ 'admin.adverts.list' | trans }}
+                                <a class="nav-link" href="{{ path('shop_index') }}">
+                                    {{ 'admin.shops.list' | trans }}
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="{{ path('adverts_waiting') }}">
-                                    {{ 'admin.adverts.waiting' | trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ path('adverts_refused') }}">
-                                    {{ 'admin.adverts.refused' | trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ path('advert_type_index') }}">
-                                    {{ 'admin.adverts.type' | trans }}
+                                <a class="nav-link" href="{{ path('products_index') }}">
+                                    {{ 'admin.products.list' | trans }}
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    {% endif %}
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="fas fa-list-alt" aria-hidden="true"></i>
-                            <span>{{ 'admin.estates' | trans }}</span>
+                            <span>{{ 'admin.category' | trans }}</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a class="nav-link" href="{{ path('estate_type_index') }}">
-                                    {{ 'admin.estates.type' | trans }}
+                                <a class="nav-link" href="{{ path('category_index') }}">
+                                    {{ 'admin.category.list' | trans }}
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="{{ path('estate_status_index') }}">
-                                    {{ 'admin.estates.status' | trans }}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ path('estate_characteristics_index') }}">
-                                    {{ 'admin.estates.characteristic' | trans }}
+                                <a class="nav-link" href="{{ path('sub_category_index') }}">
+                                    {{ 'admin.subcategory.list' | trans }}
                                 </a>
                             </li>
                             <li>
@@ -132,14 +115,6 @@
                             </li>
                         </ul>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <li>
-                        <a class="nav-link" href="{{ path('agency_index') }}">
-                            <i class="fas fa-user" aria-hidden="true"></i>
-                            <span>{{ 'admin.agency.list'|trans }}</span>
-                        </a>
-                    </li>
-                    {% endif %}
                 </ul>
             </nav>
 

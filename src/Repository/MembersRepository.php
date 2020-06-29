@@ -57,9 +57,9 @@ class MembersRepository extends ServiceEntityRepository
     public function getAgents()
     {
         return $this->createQueryBuilder('u')
-            ->join('u.adverts', 'a')
+            ->join('u.shops', 'a')
             ->where('u.enabled = :enabled')
-            ->andWhere('a.valid = :enabled')
+            ->andWhere('a.validated = :enabled')
             ->setParameter('enabled', 1)
             ->groupBy('u.id')
             ->having("count(a.id) > :limit")

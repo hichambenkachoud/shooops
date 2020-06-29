@@ -44,9 +44,15 @@ class Quartier implements \JsonSerializable
      */
     private $createDate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="quartier")
+     */
+    private $shops;
+
     public function __construct()
     {
         $this->createDate = new \DateTime('now', new \DateTimeZone('Africa/Casablanca'));
+        $this->shops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,5 +136,36 @@ class Quartier implements \JsonSerializable
             'code' => $this->code,
             'name' => $this->name
         ];
+    }
+
+    /**
+     * @return Collection|Shop[]
+     */
+    public function getShops(): Collection
+    {
+        return $this->shops;
+    }
+
+    public function addShop(Shop $shop): self
+    {
+        if (!$this->shops->contains($shop)) {
+            $this->shops[] = $shop;
+            $shop->setQuartier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShop(Shop $shop): self
+    {
+        if ($this->shops->contains($shop)) {
+            $this->shops->removeElement($shop);
+            // set the owning side to null (unless already changed)
+            if ($shop->getQuartier() === $this) {
+                $shop->setQuartier(null);
+            }
+        }
+
+        return $this;
     }
 }

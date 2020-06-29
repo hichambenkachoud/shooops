@@ -69,16 +69,42 @@
                                                 </li>
                                             </ul>
                                         </li>#}
+                                       {#
                                         <li class="dropdown">
-                                            <a class="dropdown-item dropdown-toggle" href="{{ path('front_estate_neuf_search') }}">
-                                                {{ 'front.estate.neuf' |trans}}
+                                            <a class="dropdown-item dropdown-toggle" href="{{ path('front_index') }}">
+                                                {{ 'front.shops' |trans}}
                                             </a>
                                         </li>
+                                        #}
 
                                         <li class="dropdown">
-                                            <a class="dropdown-item dropdown-toggle" href="{{ path('front_agency_index') }}">
-                                                {{ 'front.agent.found'| trans }}
+                                            <a class="dropdown-item dropdown-toggle active" href="#">
+                                                {{ 'front.categories'| trans }}
                                             </a>
+                                            <ul class="dropdown-menu">
+                                               {% for category in categories %}
+                                                  {% if category.subCategories|length > 0 %}
+                                                      <li class="dropdown-submenu">
+                                                          <a class="dropdown-item" href="#">{{ category.code|trans }}</a>
+                                                          <ul class="dropdown-menu">
+                                                              {% for subCategory in category.subCategories %}
+                                                                  {% if subCategory.enabled %}
+                                                                  <li>
+                                                                      <a class="dropdown-item" href="{{ path('search_shops_sub_category_city', {'category': subCategory.code, }) }}">
+                                                                          {{ subCategory.code|trans }}
+                                                                      </a>
+                                                                  </li>
+                                                                  {% endif %}
+                                                              {% endfor %}
+                                                          </ul>
+                                                      </li>
+                                                   {% else %}
+                                                       <li>
+                                                           <a class="dropdown-item" href="{{ path('search_shops_sub_category_city', {'category': category.code }) }}">{{ category.code|trans }}</a>
+                                                       </li>
+                                                   {% endif %}
+                                                {% endfor %}
+                                            </ul>
                                         </li>
                                       {#
                                         <li class="dropdown">
@@ -88,8 +114,8 @@
                                         </li>
                                       #}
                                         <li class="dropdown">
-                                            <a class="dropdown-item dropdown-toggle" href="{{ path('front_advert_new') }}">
-                                                {{ 'front.advert.add' |trans }}
+                                            <a class="dropdown-item dropdown-toggle" href="{{ path('new_shop') }}">
+                                                {{ 'front.shop.add' |trans }}
                                             </a>
                                         </li>
                                         {% if app.user is null %}

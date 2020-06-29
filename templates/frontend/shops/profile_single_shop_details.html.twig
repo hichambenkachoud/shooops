@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title'|trans }} - {{ 'front.my_shops'|trans }} {% endblock %}
+
+{% block metas %}
+    <meta name="title" content="{{ 'front.my_shops'|trans }}">
+    <meta name="description" content="{{ 'front.my_shops'|trans }}">
+    <meta property="og:title" content="{{ 'front.my_shops'|trans }}">
+    <meta name="keywords" content="{{ 'front.my_shops'|trans }}">
+{% endblock %}
+
+{% block body %}
+
+        <div role="main" class="main">
+
+            <section class="page-header page-header-classic">
+                <div class="container">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col p-static">
+                            <h1 data-title-border>{{ 'front.my_shops'|trans }}</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container py-2">
+
+                <div class="row">
+                    <div class="col-lg-3 mt-4 mt-lg-0">
+
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="profile-image-outer-container">
+                                    <div class="profile-image-inner-container bg-color-primary">
+                                        <img src="{{ asset('uploads/members/'~app.user.image) }}" id="picture">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <aside class="sidebar mt-2" id="sidebar">
+                            <ul class="nav nav-list flex-column mb-5">
+                                <li class="nav-item"><a class="nav-link" href="{{ path('front_security_profile') }}">{{ 'front.myinfo'|trans }}</a></li>
+                                <li class="nav-item"><a class="nav-link text-dark active" href="{{ path('front_profile_shops') }}">{{ 'front.my_shops'|trans }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('front_profile_wishes') }}">{{ 'front.wish.list'|trans }}</a></li>
+                            </ul>
+                        </aside>
+
+                    </div>
+                    <div class="col-lg-9 col-md-9" id="response">
+                        <div class="overflow-hidden mb-1">
+                            <h2 class="font-weight-normal text-7 mb-0"><strong class="font-weight-extra-bold">{{ shop.name }}</strong></h2>
+                            <a href="{{ path('front_profile_shops_update', {id: shop.id}) }}" class="btn btn-sm btn-success">{{ 'front.update'|trans }}</a>
+                            <a href="{{ path('new_product', {id: shop.id}) }}" class="btn btn-sm btn-info">{{ 'front.add.product'|trans }}</a>
+                        </div>
+                        <div class="overflow-hidden mb-4 pb-3">
+                            <p class="mb-0"></p>
+                        </div>
+
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <td>{{ 'front.title'|trans }}</td>
+                                <td>{{ shop.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'front.address'|trans }}</td>
+                                <td>{{ shop.address }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'front.mobilenumber'|trans }}</td>
+                                <td>{{ shop.telephone }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'front.whatsapp'|trans }}</td>
+                                <td>{{ shop.whatsapp }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'front.seo.description'|trans }}</td>
+                                <td>{{ shop.seoDescription }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'front.keywords'|trans }}</td>
+                                <td>{{ shop.keywords }}</td>
+                            </tr>
+                        </table>
+                        <div class="overflow-hidden mb-1">
+                            <h2 class="font-weight-normal text-7 mb-0"><strong class="font-weight-extra-bold">{{ 'front.products'|trans }}</strong></h2>
+                        </div>
+                        <div class="col-md-12 row advert-portal">
+                            {% for product in shop.products %}
+                                <div class="col-md-4 col-lg-4 col-sm-12 p-3 isotope-item home" style="padding: 6px !important;">
+                                    <div class="listing-item">
+                                        <a href="{{ path('profile_single_product_details', {id: product.id }) }}" class="text-decoration-none">
+                                            <div class="thumb-info thumb-info-lighten border advert">
+                                                <div class="thumb-info-wrapper m-0">
+
+                                                    <img src="{{ asset('uploads/products/' ~ product.images ~ '/0.png') }}"
+                                                         class="img-fluid" alt="{{ product.name }}" id="advert-img-{{ product.id }}" style="height: 170px;">
+                                                </div>
+                                                <div class="custom-thumb-info-title b-normal p-2">
+                                                    <div class="thumb-info-inner text-4 mb-1 title" id="advert-title-{{ product.id }}">{{ product.name|striptags }}</div>
+                                                    <div class="thumb-info-inner text-2 mb-2">
+                                                        {% if product.subcategory %}
+                                                            {{ product.subcategory.code|trans }},  {{ product.category.code|trans }}
+                                                        {% elseif product.category %}
+                                                            {{ product.category.code|trans }}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+{{ parent() }}
+
+    <script>
+        let long = {{ shop.longitude }}
+        let lat = {{ shop.latitude }}
+        // Initialize the platform object:
+        var platform = new H.service.Platform({
+            'apikey': 'bXdx-YJ9AP7p8kKKn3_xNxDFd9PqttfQzJ5W39fS4c8'
+        });
+
+        var maptypes = platform.createDefaultLayers();
+
+        // Instantiate (and display) a map object:
+        var map = new H.Map(
+            document.getElementById('mapContainer'),
+            maptypes.vector.normal.map,
+            {
+                zoom: 6,
+                center: { lng: long, lat: lat },
+                pixelRatio: window.devicePixelRatio || 1
+            }
+        );
+        window.addEventListener('resize', () => map.getViewPort().resize());
+
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, maptypes, 'fr-FR');
+
+    </script>
+
+{% endblock %}

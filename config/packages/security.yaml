@@ -75,12 +75,10 @@ security:
 
     access_control:
         - { path: ^/(%locales%)/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/(%locales%)/my-profile/*, allow_if: "is_fully_authenticated()" }
         - { path: ^/(%locales%)/mon_profil/*, allow_if: "is_fully_authenticated()" }
-        #- { path: ^/(%locales%)/صفحتي/*, allow_if: "is_fully_authenticated()" }
-        #- { path: ^/(%locales%)/add-new-advert/*, allow_if: "is_fully_authenticated()" }
-        - { path: ^/(%locales%)/ajouter-nouvelle-annonce, allow_if: "is_fully_authenticated()" }
-        #- { path: ^/(%locales%)/أضف-إعلان-جديد/*, allow_if: "is_fully_authenticated()" }
+        - { path: ^/(%locales%)/shop/*, allow_if: "is_fully_authenticated()" }
+        - { path: ^/(%locales%)/myproducts/*, allow_if: "is_fully_authenticated()" }
+        - { path: ^/(%locales%)/shop/new-shop/, allow_if: "is_fully_authenticated()" }
         - { path: ^/management/password-recover, allow_if: "!is_fully_authenticated()" }
         - { path: ^/management/reset-password/*, allow_if: "!is_fully_authenticated()" }
         - { path: ^/management/login, allow_if: "!is_fully_authenticated()" }

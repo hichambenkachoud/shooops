@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'title'|trans }} - {{ product.name }} {% endblock %}
+
+{% block metas %}
+    <meta name="title" content="{{ 'title'|trans }} - {{ product.name }}">
+    <meta name="description" content="{{ product.seoDescription }}">
+    <meta property="og:title" content="{{ product.seoTitle }}">
+    <meta name="keywords" content="{{ product.shop.keywords }}">
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .search-estate {
+            background: #413c46;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div role="main" class="main">
+
+        <section class="page-header page-header-classic">
+            <div class="container">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col p-static">
+                        <h1 data-title-border>{{ 'front.my_shops'|trans }}</h1>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container py-2">
+
+            <div class="row">
+                <div class="col-lg-3 mt-4 mt-lg-0">
+
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="profile-image-outer-container">
+                            <div class="profile-image-inner-container bg-color-primary">
+                                <img src="{{ asset('uploads/members/'~app.user.image) }}" id="picture">
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="sidebar mt-2" id="sidebar">
+                        <ul class="nav nav-list flex-column mb-5">
+                            <li class="nav-item"><a class="nav-link" href="{{ path('front_security_profile') }}">{{ 'front.myinfo'|trans }}</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark active" href="{{ path('front_profile_shops') }}">{{ 'front.my_shops'|trans }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('front_profile_wishes') }}">{{ 'front.wish.list'|trans }}</a></li>
+                        </ul>
+                    </aside>
+
+                </div>
+                <div class="col-lg-9 col-md-9" id="response">
+                    <div class="overflow-hidden mb-1">
+                        <h2 class="font-weight-normal text-7 mb-0"><strong class="font-weight-extra-bold">{{ product.name }}</strong></h2>
+                        <a href="{{ path('profile_single_shop_details', {id: shop.id}) }}" class="btn btn-sm btn-success">{{ 'front.backtolist'|trans }}</a>
+                        <a href="{{ path('profile_update_product', {id: product.id}) }}" class="btn btn-sm btn-info">{{ 'front.update'|trans }}</a>
+                    </div>
+                    <div class="overflow-hidden mb-4 pb-3">
+                        <p class="mb-0"></p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <table class="table table-striped">
+                                <colgroup>
+                                    <col width="50%">
+                                    <col width="50%">
+                                </colgroup>
+                                <tbody>
+                                <tr>
+                                    <td class="bg-color-primary text-light align-middle">
+                                        {{ 'front.price'|trans }}
+                                    </td>
+                                    <td class="text-4 font-weight-bold align-middle bg-color-primary text-light">
+                                        {{ product.price|number_format(0, '.', ',') }} {{ 'front.currency.dh'|trans }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ 'front.reference'|trans }}
+                                    </td>
+                                    <td>
+                                        {{ product.reference }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {% if product.shop %}
+                                        <td>
+                                            {{ 'front.shop'|trans }}
+                                        </td>
+                                        <td>
+                                            {{ product.shop.name }}
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                                {% if  product.category %}
+                                    <tr>
+                                        <td>
+                                            {{ 'front.categories'|trans }}
+                                        </td>
+                                        <td>
+                                            {{ product.category.code|lower|trans }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if  product.subCategory %}
+                                    <tr>
+                                        <td>
+                                            {{ 'front.subcategories'|trans }}
+                                        </td>
+                                        <td>
+                                            {{ product.subCategory.code|lower|trans }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div class="thumb-gallery">
+                                <div class="lightbox"
+                                     data-plugin-options="{'delegate': 'a', 'type': 'image', 'gallery': {'enabled': true}}">
+                                    <div class="owl-carousel owl-theme manual thumb-gallery-detail show-nav-hover"
+                                         id="thumbGalleryDetail">
+                                        {% for image in images %}
+                                            <div>
+                                                <a href="{{ asset('uploads/products/'~ product.images ~ '/' ~ image) }}">
+                                                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders text-4">
+                                                    <span class="thumb-info-wrapper text-4">
+                                                        <img alt="Property Detail"
+                                                             src="{{ asset('uploads/products/'~ product.images ~ '/' ~ image) }}"
+                                                             class="img-fluid">
+                                                        <span class="thumb-info-title text-4">
+                                                            <span class="thumb-info-inner text-4"><i
+                                                                        class="icon-magnifier icons text-4"></i></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="owl-carousel owl-theme manual thumb-gallery-thumbs mt"
+                                     id="thumbGalleryThumbs">
+                                    {% for image in images %}
+                                        <div>
+                                            <img alt="Property Detail"
+                                                 src="{{ asset('uploads/products/'~ product.images ~ '/' ~ image) }}"
+                                                 class="img-fluid cur-pointer">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+
+                            <h4 class="mt-3 mb-3">{{ 'front.description'|trans }}</h4>
+                            <p>{{ product.description|nl2br }}</p>
+
+                            <hr class="solid my-5">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock body %}

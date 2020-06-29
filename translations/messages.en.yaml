@@ -1,4 +1,4 @@
-title: Estate Site
+title: Shoops
 hello: Hi
 enjoy: Enjoy!
 admin:
@@ -29,14 +29,6 @@ admin:
   members: Agents
   administrations: Administrators
   localisation: Localisation
-  adverts: Adverts
-  adverts.list: Adverts List
-  adverts.waiting: Waiting Adevrts
-  adverts.refused: Refused Adverts
-  adverts.type: Adverts Type
-  estates: Estates
-  estates.type: Estate Type
-  estates.characteristic: Estate Features
   mails: Mails
   backtolist: Back To List
   informations: Informations
@@ -55,16 +47,8 @@ admin:
   frensh: Frensh
   english: English
   languages: Languages
-  estate: Estate
-  estates.type.management: Estate Type Management
-  adverts.type.management: Advert Type Management
-  estates.status: Estate Status
-  estates.status.management: Estate Status Management
   delete.sure: Are you sure to delete this item?
   type: Type
-  characteristic.general: General Features
-  characteristic.interior: Interior Features
-  characteristic.additional: Additional Features
   icon: Icon
   signin: Sign in
   signup: Sign up
@@ -129,28 +113,34 @@ admin:
   refused: Refused
   tovalid: Validate
   torefuse: refuse
-  adverts.management: Adverts Management
-  advert.valid: This announcement is already published
-  advert.notvalid: This announcement is not yet validated
-  advert.refused: This announcement is disapproved
   confirm: Confirm
   cancel: Cancel
   sure: Are you sure?
-  sure.valid.advert: Are you sure you want to validate this announcement?
-  sure.refuse.advert: Are you sure you want to decline this announcement?
-  sure.delete.advert: Are you sure you want to delete this announcement?
-  advert.notfound: The announcement cannot be found
-  advert.valid.success: The announcement is validated successfully, and an email has been sent to the owner
-  advert.refuse.success: The announcement is successfully declined
-  advert.delete.success: The announcement is successfully deleted
   form.invalid: The form is invalid, please refresh the page
   roles: Roles
-  agency: Agency
-  agency.management: Agency Management
   url: URL
   image: Image
   url.format: The URL format is not valid
-  daddress.format: The address must contain at least 20 characters
+  address.format: The address must contain at least 20 characters
+  users.create.message: Votre compte a bien été crée, veuillez cliquer sur le lien de validation envoyé à votre boite email
+  shops: Shops
+  shops.list: Shop List
+  products.list: Product List
+  category: Categories
+  category.list: Category List
+  subcategory.list: Sub-category List
+  longitude: Longitude
+  latitude: Latitude
+  agent: Agent
+  validated: Validated
+  shops.management: Shops Management
+  reference: Reference
+  products: Products
+  products.management: Products Management
+  price: Price
+  category.management: Category Management
+  subcategory.management: SubCategory Management
+  subcategory: Sub-Categories
 
 
 front:
@@ -162,8 +152,6 @@ front:
   contactus: Contact Us
   advert.add: Add Advert
   signin: Sign In
-  property.rent: For Rent
-  property.sale: For Sale
   terms-and-condition: Termes & conditions
   confidente: Confidentialité
   already.have.account: I'm a Returning Customer
@@ -215,17 +203,9 @@ front:
   mobileNumber.format: Mobile number format is invalid
   email.exist: An account with this email address is already exists
   username.exist: An account with this username is already exists
-  advert.information: Information
-  advert.characteristic: Features
-  advert.image.emplacement: Pictures and location
-  advert.description: Description
   previous: Previous
   next: Next
   finish: Finish
-  adverts.type: Advert Type
-  estates.type: Property type
-  choose.option: Choose an option
-  estate.status: State of property
   emplacement: Location
   region: Region
   city: City
@@ -236,100 +216,14 @@ front:
   currency.dh: DH
   area: Area
   price: Price
-  rooms: Rooms
-  bedrooms: Bedrooms
-  bedroom: Bedroom
-  bathroom: Bathroom
-  bathrooms: Bathrooms
-  bathrooms1: 1  Bathroom
-  bathrooms2: 2 Bathrooms
-  bathrooms3: 3 Bathrooms
-  bathrooms4: 4 Bathrooms
-  bathrooms5: 5 Bathrooms
-  floor: Floor of the property
-  age: Age of property
-  soil.type: Soil type
-  floor0: Ground floor
-  floor1: First floor
-  floor2: Second floor
-  floor3: Third floor
-  floor4: Fourth floor
-  floor5: Fifth floor
-  floor6: Sixth floor
-  floor7: Seventh floor
-  floor8: Eighth floor
-  floor9: Ninth floor
-  floor10: Tenth floor
-  floor11: Eleventh floor
-  floor12: Twelfth floor
-  floor13: Thirteenth floor
-  floor14: Fourteenth floor
-  floor15: Fifteenth floor
-  floor16: Sixteenth floor
-  floor17: Seventeenth floor
-  floor18: Eighteenth floor
-  floor19: Nineteenth floor
-  floor20: Twentieth floor
-  floor.start: Ground floor
-  floor.middle: Intermediate floors
-  floor.end: Last floor
-  age.1: Less than a year
-  age.1-5: 1 to 5 years old
-  age.5-10: 5 to 10 years old
-  age.10-20: 10 to 20 years old
-  age.20-30: 20 to 30 years old
-  age.30-40: 30 to 40 years old
-  age.40-50: 40 to 50 years old
-  age.50-60: 50 to 60 years old
-  age.60-70: 60 to 70 years old
-  age.70-80: 70 to 80 years old
-  age.80-90: 80 to 90 years old
-  age.90-100: 90 to 100 years
-  age.100: Over 100 years
-  parquet: Parquet
-  marble: Marble
-  tile: TILE
-  other: Other
-  min_night: Minimum de nuitées
-  capacity: Capacity
   description: Description
   title: Title
   images.invalid: Image format is invalid
   image.extension.invalid: Image extension is invalid
-  advert.author: The author of the announcement
-  advert.contact: Contact the announcer
-  address: Address
-  advert.add.success: The announcement has been saved, please wait for confirmation from the administrator
-  advert.update.success: The announcement has been updated
   contact: Contact information
-  bedrooms.min: Min. bedrooms
-  bedrooms.max: Max. bedrooms
-  area.min: Min. area
-  area.max: Max. area
   price.min: Min. Price
   price.max: Max. Price
   search: Search
-  bedrooms0: 0 Room (Studio)
-  bedrooms1: 1 Room
-  bedrooms2: 2 Rooms
-  bedrooms3: 3 Rooms
-  bedrooms4: 4 Rooms
-  bedrooms5: 5 Rooms
-  bedrooms6: 6 Rooms
-  bedrooms7: 7 Rooms
-  bedrooms8: 8 Rooms
-  bedrooms9: 9 Rooms
-  bedrooms10: 10 Rooms
-  rent.day: Per day
-  rent.month: Per month
-  rent.year: Per year
-  currency.dh.day: DH/day
-  currency.dh.month: DH/month
-  currency.dh.year: DH/year
-  listingfor: Listing for
-  rent: Rent
-  sale: Sale
-  or: or
   phone_agent: Call
   send_mail: E-mail
   contact_agent: Email the agent
@@ -343,10 +237,6 @@ front:
   contact-agent.email.content: A visitor sent you this email about one of your ads, below you find the content of the message
   ccontact-agency.email.content: A visitor sent you this email, below you find the content of the message
   message: Message
-  advert.confirm: Confirmation of adding an announcement
-  advert.confirm.email.content: Your announcement has been validated, please click on the following link to view it
-  exclusive.locations: Exclusive Locations
-  special.offers: Special offers
   our-agent: Our Agents
   newsletter: Newsletter
   newsletter.content: Subscribe and be the first to know about our best offers
@@ -359,42 +249,19 @@ front:
   request.information.content: Contact us or give us a call to request more information
   message.sent: Message has been sent to us.
   subject: Subject
-  property.agent: property owner
-  most.searchable: Popular searches
-  rent.apartment.casablanca: Apartments for rent in Casablanca
-  rent.apartment.marrakech: Apartments for rent in Marrakech
-  rent.apartment.rabat: Apartments for rent in Rabat
-  rent.apartment.tanger: Apartments for rent in Tangier
-  rent.apartment.agadir: Apartments for rent in Agadir
-  sell.apartment.casablanca: Apartments for sale in Casablanca
-  sell.house.casablanca: Houses for sale in Casablanca
-  sell.apartment.marrakech: Apartments for sale in Marrakech
-  sell.house.marrakech: Houses for sale in Marrakech
-  sell.apartment.rabat: Apartments for sale in Rabat
-  sell.villa.rabat: Villa for sale in Rabat
-  sell.apartment.tanger: Apartments for sale in Tangier
-  sell.villa.tanger: Villa for sale in Tangier
-  sell.apartment.agadir: Apartments for sale in Agadir
-  sell.house.agadir: Houses for sale in Agadir
   followus: follow us
   publication.date: Publication date
   publication.none: Indifferent
   publication.day: In the past 24 hours
   publication.week: Last week
   publication.month: The last month
-  rent.type: Rental type
   sort.important: Importance
   sort.price.asc: Ascending price
   sort.price.desc: Descending price
   sort.date.des: The most recents
   sort.date.arc: The oldest
-  sort.area.desc: Big Area
-  sort.area.asc: Small area
   sort.plus: More
   image.upload.success: Your photo has been successfully uploaded
-  agency: Agency
-  agencies: Agencies
-  agency.name: Name of the agency
   view.site: Check the site
   faq: FAQ
   send_message: Send a message
@@ -421,97 +288,97 @@ front:
   agency.not-available: The agency is no longer available
   no_result: We have no property, at the moment, which corresponds to your search
   no_result_city: No results match your search
-  rent.time: Rental time
-  rent.holiday: Vacation location
-  estate.neuf: New real estate
   neuf: New
-  my_adverts: My announcements
-  wish.list: Recorded announcements
+  wish.list: Recorded Shops
   city.quartier: District or City
   backtolist: Back to search
+  listing.shops: New Shops
+  shop: Shop
+  shop.add: Add your Shop
+  shops: Shops
+  categories: Categories
+  search.shop: I'm looking for a shop in
+  exclusive.locations: Exclusive Locations
+  no.sub_category: No subcategories
+  subcategories: Sub Categories
+  property.agent: Property Agent
+  products: Products
+  shop.image.emplacement: Image And Localisation
+  choose.option: Choose an option
+  keywords: Keywords
+  seo.description: SEO description
+  whatsapp: Whatsapp
+  my_shops: My shops
+  update: Update
+  add.product: Add new product
 
-yes: Yes
-no: No
-sell: For sell
-rent: For rent
-apartment: Appartment
-house: House
-riad: Riad
-villa: Villa
-office: Office
-commercial: Commercial
-terrain: Land
-ferme: Ferme
-building: Building
-duplex: Duplex
-studio: Studio
-new: New
-renovate: Renovate
-good-condition: Good condition
-furnished: Furnished
-unfurnished: Unfurnished
-partially-furnished: Partially furnished
-properties: Properties
-
-garage: Garage
-garden: Garden
-terrace: Terrace
-elevator: Elevator
-sea: Sea
-mountainside: Mountainside
-pool: Pool
-concierge: Concierge
-storage: Storage
-parabolic_antenna: Parabolic Antenna
-fireplace: Fireplace
-air_conditioner: Air-Conditioner
-heating: Heating
-security_camera: Security camera
-door: Double door
-fridge_appliance: Equipped kitchen
-oven: Oven
-tv: TV
-washing_machine: Washing machine
-microwave: Microwave
-internet: Internet
-search.result: Résultat de Recherche
-advert.found: One property found
-adverts.found: Proprties found
-advert.none: No properties found
-urbain: In urban areas
-agricole: In agricultural area
-tourbain: In an area to be urbanized
-montagne: In the mountains
-comercial: Commercial
-route: Road access
-puits: Puits
-emplacement: Well located
-boulevard: On the main boulevard
-coproprie: In co-ownership
-charge: Freight elevator
-alarm: Alarm system
-lotissement: In subdivision
-industriel: Industrial
-habitation: Residential building
-cave: Cellar
-parking: Car park
-autres: Others
-garden_interieur: Indoor garden
-rue: On the street
-etable: Cowshed
-other_batiment: Other buildings
-arbres: Trees
-plantation: Plantation
-irrigation: Irrigation
-roulant: Rolling Stock
-gardien: Guardian
-reseau_electric: Electrical network
-reseau_eau: Portable water network
-goutegoute: Drop by drop
-materiel: Material / Equipment
-meuble: Furnished
-hammam: Hammam
-pergola: Pergola
+mode-femme: Man fashion
+mode-homme: Woman fashion
+telefone-communications: Telephones and Telecommunications
+ordinateur-bureau-security: Computers, office and security
+electronique: Electronic
+bijoux-montres: Jewelry and watches
+maison-electromenager: Home and appliances
+sacs-chaussures: Bags and shoes
+jouets-enfants: Toys and children
+activity-sports: Outdoor activities and sports
+beauty-sante-cheveux: Beauty, health and hair
+autos-motos: Cars and motorcycles
+briclage-outils: Bricolage and tools
+animalerie: Pet Shop
+clothes: Clothing
+clothes-sport: Sports clothing
+lingerie: Lingerie
+traditionnel: Traditional
+accessoires: Accessories
+chaussures-homme: Men's shoes
+chaussures-femme: Women's Shoes
+bagages-sacs-homme: Men's luggage & bags
+bagages-sacs-femme: Women's luggage & bags
+mariage: Marriage and engagement
+bijoutrie-fine: Fine jewelry
+bijoutrie-mode: Fashion jewelry
+montres-hommes: Men's Watches
+montres-femmes: Women's Watches
+cosmetique: Cosmetic
+parapharmacie: Drugstore
+parfum-hommes: Men's fragrance
+parfum-femmes: Women fragrance
+sante-soins: Health & Personal Care
+salon-bedroom: Living room
+cuisine: Cooked
+salle-bain: Bathroom
+linge-maison: Household linen
+jardin: Garden
+electromenager: Home appliance
+mode-fille: Girl fashion
+mode-garcon: Boy fashion
+maternite-bebe: Maternity & baby
+jouets: Toys
+tenues-sport: Sportswear
+baskets: Baskets
+equipement-sport: Sports equipment
+natation: Swimming
+peche: Peach
+golf: Golf
+football: Soccer
+cyclisme: Cycling
+equipement-electrique: Electrical equipment
+outils: Tools
+eclairages-interne: Interior lighting
+eclairages-externe: Outdoor lighting
+eclairages-led: LED lights
+accessoires-car: Car accessories
+accessoires-motos: Motorcycle accessories
+electronique-embarquee: On-board electronics
+outils-entretien: Tools & Maintenance
+hotels: Hotels
+activite-excursion: Activity & Excursions
+voyages: Travel
+location-cars: Car rental
+croisiers: Cruises
+hajj: Hajj
+omra: Umrah
 
 assilah: Assilah
 fahs: Fahs
@@ -551,7 +418,7 @@ guelmim-ouednoun: Guelmim-Oued Noun
 laayoune-sakia-elhamra: Laâyoune-Sakia El Hamra
 dakhla-oued-eddahab: Dakhla-Oued Ed-Dahab
 ouazzane: Ouazzane
-chefchaouen: Fhefchaouen
+chefchaouen: Chefchaouen
 fahs-anjra: Fahs-Anjra
 larache: Larache
 al-hoceima: Al Hoceïma

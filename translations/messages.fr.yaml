@@ -1,4 +1,4 @@
-title: Site Immobilier
+title: Shoops
 hello: Bonjour
 enjoy: prendre plaisir!
 admin:
@@ -29,14 +29,6 @@ admin:
   members: Agents
   administrations: Administrateurs
   localisation: Localisation
-  adverts: Annonces
-  adverts.list: Liste des Annonces
-  adverts.waiting: Annonces en attentes
-  adverts.refused: Annonces Réfusées
-  adverts.type: Type d'annonce
-  estates: Propriétés
-  estates.type: Type de Propriétée
-  estates.characteristic: Characteristiques des biens
   mails: Emails
   backtolist: Retour au liste
   informations: Information
@@ -55,16 +47,8 @@ admin:
   frensh: Français
   english: Anglais
   languages: Les Langues
-  estate: Propriété
-  estates.type.management: Gestion des Types des Propriétés
-  adverts.type.management: Gestion des Types d'annonces
-  estates.status: Etat des biens
-  estates.status.management: Gestion des Etats des biens
   delete.sure: Êtes-vous sûre de vouloir supprimer cet item?
   type: Type
-  characteristic.general: Caractéristiques générales
-  characteristic.interior: Caractéristiques Intérieurs
-  characteristic.additional: Caractéristiques supplémentaires
   icon: Icon
   signin: Se connecter
   signup: S'inscrire
@@ -129,40 +113,43 @@ admin:
   refused: Refusé
   tovalid: Valider
   torefuse: Refuser
-  adverts.management: Gestion des Annonces
-  advert.valid: Cette annonce est déjà publiée
-  advert.notvalid: Cette annonce n'est pas encore validée
-  advert.refused: Cette annonce est refusée
   confirm: Confirmer
   cancel: Annuler
   sure: Êtes-vous sûr?
-  sure.valid.advert: Êtes-vous sûr de vouloir valider cette annonce?
-  sure.refuse.advert: Êtes-vous sûr de vouloir refuser cette annonce?
-  sure.delete.advert: Êtes-vous sûr de vouloir supprimer cette annonce?
-  advert.notfound: L'annonce est introuvable
-  advert.valid.success: L'annonce est validé avec succès, et un email a été envoyé au propriétaire
-  advert.refuse.success: L'annonce est refusé avec succès
-  advert.delete.success: L'annonce est supprimé avec succès
   form.invalid: Le formulaire est invalide, veuillez rafraîchir la page
   roles: Rôles
-  agency: Agence
-  agency.management: Gestion des agences
   url: URL
   image: Image
   url.format: Le format URL n'est pas valide
-  daddress.format: L'adresse doit contenir au moins 20 charactéres
+  address.format: L'adresse doit contenir au moins 20 charactéres
+  users.create.message: Votre compte a bien été crée, veuillez cliquer sur le lien de validation envoyé à votre boite email
+  shops: Boutiques
+  shops.list: Liste des boutiques
+  products.list: Liste des produits
+  category: Catégorie
+  categories: Catégories
+  category.list: Liste des catégories
+  subcategory.list: Liste des sous-catégories
+  longitude: Longitude
+  latitude: Latitude
+  agent: Agent
+  validated: validé
+  shops.management: Gestion des boutiques
+  reference: Référence
+  products: Produits
+  product: Produit
+  products.management: Gestion des produits
+  price: Prix
+  category.management: Gestion des catégories
+  subcategory.management: Gestion des Sous-catégories
+  subcategory: Sous-catégorie
+  subcategories: Sous-catégories
 
 front:
   home: Accuiel
   aboutus: A propos
-  property: Propriété
-  agent.found: Trouver une agence
-  blog: Blog
   contactus: Contactez-nous
-  advert.add: Diffusez une annonce
   signin: Se connecter
-  property.rent: A Louer
-  property.sale: A Vendre
   terms-and-condition: Termes & conditions
   confidente: Confidentialité
   already.have.account: Je suis un client fidèle
@@ -214,17 +201,9 @@ front:
   mobileNumber.format: Le format de N° Téléphone est invalide
   email.exist: Un compte avec cette adresse e-mail est déjà existe
   username.exist: Un compte avec ce nom d'utilisateur est déjà existe
-  advert.information: Informations
-  advert.characteristic: Caractéristiques
-  advert.image.emplacement: Images et emplacement
-  advert.description: Description
   previous: Précédant
   next: Suivant
   finish: Terminer
-  adverts.type: Type d'annonce
-  estates.type: Type de bien
-  choose.option: Choisir une option
-  estate.status: État de bien
   emplacement: Emplacement
   region: Région
   city: Ville
@@ -235,100 +214,12 @@ front:
   currency.dh: DH
   area: Surface
   price: Prix
-  rooms: Pièces
-  bedrooms: Chambres
-  bedroom: Chambre
-  bathroom: Salle de bain
-  bathrooms: Salles de bains
-  bathrooms1: 1 Salle de bains
-  bathrooms2: 2 Salles de bains
-  bathrooms3: 3 Salles de bains
-  bathrooms4: 4 Salles de bains
-  bathrooms5: 5 Salles de bains
-  floor: Étage de la propriété
-  age: Âge du bien
-  soil.type: Type du sol
-  floor0: Rez-de-chaussée
-  floor1: Premier étage
-  floor2: Deuxième étage
-  floor3: Troisième étage
-  floor4: Quatrième étage
-  floor5: Cinquième étage
-  floor6: Sixième étage
-  floor7: Septième étage
-  floor8: Huitième étage
-  floor9: Neuvième étage
-  floor10: Dixième étage
-  floor11: Onzième étage
-  floor12: Douzième étage
-  floor13: Treizième étage
-  floor14: Quatorzième étage
-  floor15: Quinzième étage
-  floor16: Seizième étage
-  floor17: Dix-septième étage
-  floor18: Dix-huitième étage
-  floor19: Dix-neuvième étage
-  floor20: Vingtième étage
-  floor.start: Rez-de-chaussée
-  floor.middle: Étages intermédiaires
-  floor.end: Dernier étage
-  age.1: Moins d'un an
-  age.1-5: D'un an à 5 ans
-  age.5-10: De 5 ans à 10 ans
-  age.10-20: De 10 ans à 20 ans
-  age.20-30: De 20 ans à 30 ans
-  age.30-40: De 30 ans à 40 ans
-  age.40-50: De 40 ans à 50 ans
-  age.50-60: De 50 ans à 60 ans
-  age.60-70: De 60 ans à 70 ans
-  age.70-80: De 70 ans à 80 ans
-  age.80-90: De 80 ans à 90 ans
-  age.90-100: De 90 ans à 100 ans
-  age.100: Plus de 100 ans
-  parquet: Parquet
-  marble: Marble
-  tile: TILE
-  other: Autre
-  min_night: Minimum de nuitées
-  capacity: Capacité
   description: Description
   title: Titre
   images.invalid: Le format des images est invalide
   image.extension.invalid: L'extension des images sont invalides
-  advert.author: L'auteur de l'annonce
-  advert.contact: Contacter l'annonceur
   address: Adresse
-  advert.add.success: L'annonce a bien été enregistré, veuillez attendre la confirmation de l'administrateur
-  advert.update.success: L'annonce a bien été modifié
   contact: Information de contact
-  bedrooms.min: Min. Chambres
-  bedrooms.max: Max. Chambres
-  area.min: Min. Surface
-  area.max: Max. Surface
-  bedrooms0: 0 Chambre (Studio)
-  bedrooms1: 1 Chambre
-  bedrooms2: 2 Chambres
-  bedrooms3: 3 Chambres
-  bedrooms4: 4 Chambres
-  bedrooms5: 5 Chambres
-  bedrooms6: 6 Chambres
-  bedrooms7: 7 Chambres
-  bedrooms8: 8 Chambres
-  bedrooms9: 9 Chambres
-  bedrooms10: 10 Chambres
-  price.min: Min. Prix
-  price.max: Max. Prix
-  search: Chercher
-  rent.day: Par jour
-  rent.month: Par mois
-  rent.year: Par année
-  currency.dh.day: DH/jour
-  currency.dh.month: DH/mois
-  currency.dh.year: DH/année
-  listingfor: Annonce à
-  rent: Louer
-  sale: Vendre
-  or: ou
   phone_agent: Appel
   send_mail: E-mail
   contact_agent: Envoyez un courriel à l'agent
@@ -337,15 +228,8 @@ front:
   fullname: Nom complet
   agent: Agent
   form.contatc.content: Bonjour, j'ai trouvé votre bien Réf %reference%. Sur le %site%. Merci de bien vouloir me contacter. Merci
-  adverts.contact.success: Votre email a bien été envoyeé au propriétaire de bien immobilier
   contact-agent: Demande d'information
-  contact-agent.email.content: Un visiteur vous a envoyé  ce mail à propos d'une de vos annonces, vous trouvez ci-dessous le contenu du message
-  contact-agency.email.content: Un visiteur vous a envoyé  ce mail, vous trouvez ci-dessous le contenu du message
   message: Message
-  advert.confirm: Confirmation d'ajout d'annonce
-  advert.confirm.email.content: Votre annonce a bien été validé, veuillez cliquer sur le lien suivant pour la voir
-  exclusive.locations: Emplacements exclusifs
-  special.offers: Offres spéciales
   our-agent: Nos agents
   newsletter: Newsletter
   newsletter.content: Abonnez-vous et soyez les premiers informés de nos meilleures offres
@@ -358,42 +242,20 @@ front:
   request.information.content: Contactez-nous ou appelez-nous pour demander plus d'informations
   message.sent: Un message nous a été envoyé.
   subject: Sujet
-  property.agent: propriétaire de bien
   most.searchable: Recherches populaires
-  rent.apartment.casablanca: Appartement à louer à Casablanca
-  rent.apartment.marrakech: Appartement à louer à Marrakech
-  rent.apartment.rabat: Appartement à louer à Rabat
-  rent.apartment.tanger: Appartement à louer à Tanger
-  rent.apartment.agadir: Appartement à louer à Agadir
-  sell.apartment.casablanca: Appartement à vendre à Casablanca
-  sell.house.casablanca: Maison à vendre à Casablanca
-  sell.apartment.marrakech: Appartement à vendre à Marrakech
-  sell.house.marrakech: Maison à vendre à Marrakech
-  sell.apartment.rabat: Appartement à vendre à Rabat
-  sell.villa.rabat: Villa à vendre à Rabat
-  sell.apartment.tanger: Appartement à vendre à Tanger
-  sell.villa.tanger: Villa à vendre à Tanger
-  sell.apartment.agadir: Appartement à vendre à Agadir
-  sell.house.agadir: Maison à vendre à Agadir
   followus: Suivez nous
   publication.date: Date de publication
   publication.none: Indifférent
   publication.day: Au cours des dernières 24h
   publication.week: La dernière semaine
   publication.month: Le dernier mois
-  rent.type: Type de location
   sort.important: Importance
   sort.price.asc: Prix croissant
   sort.price.desc: Prix décroissant
   sort.date.asc: Les plus récentes
   sort.date.desc: Les plus anciennes
-  sort.area.asc: Grande surface
-  sort.area.desc: Petite surface
   sort.plus: Plus
   image.upload.success: Votre photo a bien été téléchargée
-  agency: Agence
-  agencies: Agences
-  agency.name: Nom de l'agence
   view.site: Voir le site
   faq: FAQ
   send_message: Envoyer un message
@@ -420,99 +282,101 @@ front:
   agency.not-available: L'agence n'est plus disponible
   no_result: Nous n’avons aucune propriété, en ce moment, qui correspond à votre recherche
   no_result_city: Aucune résultat correspond à votre recherche
-  rent.time: Temps de location
-  rent.holiday: Location de vacances
-  estate.neuf: Immobilier neuf
-  neuf: Nouveau
-  my_adverts: Mes annonces
-  wish.list: Les annonces enregistrées
+  wish.list: Les boutiques enregistrées
   image.bad.format: Le format est invalide
   city.quartier: Quartier ou Ville
   backtolist: Retour à la recherche
+  search: Chercher
+  listing.shops: Nouveaux boutiques
+  shop: Boutique
+  shop.add: Ajouter ta boutique
+  shops: Boutiques
+  categories: Catégories
+  search.shop: Je cherche une boutique dans
+  exclusive.locations: Emplacements exclusifs
+  no.sub_category: Aucune sous-catégories
+  subcategories: Sous-catégories
+  property.agent: propriétaire de bien
+  products: Produits
+  shop.image.emplacement: Image et Emplacement
+  choose.option: Choisir une option
+  keywords: Mots clé
+  seo.description: SEO description
+  whatsapp: Whatsapp
+  my_shops: Mes boutiques
+  update: Modifier
+  add.product: Ajouter un produit
 
 
-yes: Oui
-no: Non
-sell: À vendre
-rent: À louer
-apartment: Appartement
-house: Maison
-riad: Riad
-villa: Villa
-office: Bureau
-commercial: Local commercial
-terrain: Terrain
-ferme: Ferme
-building: Bâtiment
-duplex: Duplex
-studio: Studio
-new: Nouveau
-renovate: à rénover
-good-condition: Bon état
-furnished: Meublée
-unfurnished: Non meublée
-partially-furnished: Partiellement meublée
-properties: Propriétés
 
-garage: Garage
-garden: Jardin
-terrace: Terrasse
-elevator: Ascenseur
-sea: Mer
-mountainside: Flanc de montagne
-pool: Bassin
-concierge: Concierge
-storage: Espace de rangement
-parabolic_antenna: Antenne parabolique
-fireplace: Cheminée
-air_conditioner: Climatisation
-heating: Chauffage
-security_camera: Caméra de sécurité
-door: Double porte
-fridge_appliance: Cuisine équipée
-oven: Four
-tv: La télé
-washing_machine: Machine à laver
-microwave: Four micro onde
-internet: Internet
-search.result: Résultat de Recherche
-advert.found: Une propriété trouvé
-adverts.found: Propriétés trouvés
-advert.none: Aucune propriété trouvé
-urbain: En zone urbaine
-agricole: En zone agricole
-tourbain: En zone à urbaniser
-montagne: En montagne
-comercial: Commercial
-route: Accès sur route.
-puits: Puits
-emplacement: Bien situé
-boulevard: Sur grand boulevard
-coproprie: En copropriété
-charge: Monte charge
-alarm: Système d'alarme
-lotissement: En lotissement
-industriel: Industriel
-habitation: Immeuble habitation
-cave: Cave
-parking: Parking
-autres: Others
-garden_interieur: Jardin intérieur
-rue: Sur rue
-etable: Etable
-other_batiment: Autres bâtiment
-arbres: Arbres
-plantation: Plantation
-irrigation: Irrigation
-roulant: Matériel roulant
-gardien: Gardien
-reseau_electric: Réseau électrique
-reseau_eau: Réseau eau portable
-goutegoute: Goute à Goute
-materiel: Matériel / Equipement
-meuble: Meublé
-hammam: Hammam
-pergola: Pergola
+mode-femme: Mode Femme
+mode-homme: Mode homme
+telefone-communications: Téléphones et Télécommunications
+ordinateur-bureau-security: Ordinateurs, bureau et sécurité
+electronique: Électronique
+bijoux-montres: Bijoux et montres
+maison-electromenager: Maison et électroménager
+sacs-chaussures: Sacs et chaussures
+jouets-enfants: Jouets et enfants
+activity-sports: Activités plein air et sports
+beauty-sante-cheveux: Beauté, santé et cheveux
+autos-motos: Autos et motos
+briclage-outils: Bricolage et outils
+animalerie: Animalerie
+
+clothes: Vêtements
+clothes-sport: Vêtements de sport
+lingerie: Lingerie
+traditionnel: Traditionnel
+accessoires: Accessoires
+chaussures-homme: Chaussures Hommes
+chaussures-femme: Chaussures Femmes
+bagages-sacs-homme: Bagages & sacs hommes
+bagages-sacs-femme: Bagages & sacs femmes
+mariage: Mariage et fiançailles
+bijoutrie-fine: Bijoutrie fine
+bijoutrie-mode: Bijoutrie à la mode
+montres-hommes: Montres Hommes
+montres-femmes: Montres Femmes
+cosmetique: Cosmétique
+parapharmacie: Parapharmacie
+parfum-hommes: Parfum hommes
+parfum-femmes: Parfum femmes
+sante-soins: Santé & soins personnels
+salon-bedroom: Salon Chambre à cocher
+cuisine: Cuisine
+salle-bain: Salle de bain
+linge-maison: Linge de maison
+jardin: Jardin
+electromenager: Electroménager
+mode-fille: Mode fille
+mode-garcon: Mode garçon
+maternite-bebe: Maternité & bébé
+jouets: Jouets
+tenues-sport: Tenues de sport
+baskets: Baskets
+equipement-sport: Equipement sportifs
+natation: Natation
+peche: Pêche
+golf: Golf
+football: Football
+cyclisme: Cyclisme
+equipement-electrique: Equipement électrique
+outils: Outils
+eclairages-interne: Eclairages d intérieur
+eclairages-externe: Eclairages d extérieur
+eclairages-led: Eclairages LED
+accessoires-car: Accessoires voitures
+accessoires-motos: Accessoires motos
+electronique-embarquee: Electronique embarquée
+outils-entretien: Outils & Entretien
+hotels: Hôtels
+activite-excursion: Activité & Excursions
+voyages: Voyages
+location-cars: Location Voiture
+croisiers: Croisières
+hajj: Hajj
+omra: Omra
 
 assilah: Assilah
 fahs: Fahs
@@ -552,7 +416,7 @@ guelmim-ouednoun: Guelmim-Oued Noun
 laayoune-sakia-elhamra: Laâyoune-Sakia El Hamra
 dakhla-oued-eddahab: Dakhla-Oued Ed-Dahab
 ouazzane: Ouazzane
-chefchaouen: Fhefchaouen
+chefchaouen: chefchaouen
 fahs-anjra: Fahs-Anjra
 larache: Larache
 al-hoceima: Al Hoceïma

@@ -9,8 +9,18 @@
 #header .header-nav-main nav > ul > li.open > a, #header .header-nav-main nav > ul > li:hover > a{
     color: white;
 }
+#header .header-nav-main-sub-effect-1 nav > ul > li.dropdown .dropdown-menu li.dropdown-submenu:hover > .dropdown-menu{
+    transform: translate3d(0px, -80px, 0px);
+}
 .search-estate{
     background-color: #413c46;
+}
+#price-error{
+    position: absolute;
+    top: 100%;
+}
+#-error{
+    position: absolute;
 }
 .details{
     text-align: left;
@@ -102,7 +112,7 @@
     color: #fff;
 }
 .home .advert{
-    height: 375px;
+    height: 290px;
 }
 .thumb-info-inner span.feature{
     display: inline-flex;

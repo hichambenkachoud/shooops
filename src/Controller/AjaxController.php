@@ -10,6 +10,8 @@ use App\Entity\City;
 use App\Entity\Members;
 use App\Entity\Province;
 use App\Entity\Quartier;
+use App\Entity\Shop;
+use App\Entity\SubCategory;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -306,6 +308,29 @@ class AjaxController extends AbstractController
         return new Response(json_encode($response));
     }
 
+    /**
+     * @Route("/subcategory/category/", name="ajax_get_subcategory_by_category", methods={"POST"})
+     */
+    public function getSubCategoryOfCategory()
+    {
+        $data = $this->_checkData();
+
+        $category = isset($data['category']) ? $data['category'] : null;
+
+        $result = [];
+        $subcategories = $this->entityManager->getRepository(SubCategory::class)->findBy(['category' => $category, 'enabled' => true], ['name'=> 'ASC']);
+        foreach ($subcategories as $subcategory){
+            $p['id'] = $subcategory->getId();
+            $p['code'] = $this->trans->trans($subcategory->getCode());
+            $p['name'] = $subcategory->getCode();
+            $result[] = $p;
+        }
+
+        $response["code"] = 0;
+        $response["response"] = ["subcategories"=> $result];
+        return new Response(json_encode($response));
+    }
+
 
 
     /**
@@ -531,13 +556,13 @@ class AjaxController extends AbstractController
 
         $imageToDelete = $request->get('key');
 
-        $advert = $this->entityManager->getRepository(Adverts::class)->find(intval($id));
+        $advert = $this->entityManager->getRepository(Shop::class)->find(intval($id));
         if ($advert){
             $uploadsDir = $this->getParameter('uploads_directory');
             $newDirName = $uploadsDir.$advert->getImages();
 
             if (is_file($newDirName.'/'.$imageToDelete)){
-                unlink($newDirName.'/'.$imageToDelete);
+                //unlink($newDirName.'/'.$imageToDelete);
             }
         }
 
@@ -552,7 +577,7 @@ class AjaxController extends AbstractController
         /** @var Members $member */
         $member = $this->getUser();
 
-        $wishList = json_decode($member->getWishList(), true);
+        $wishList = json_decode($member->getWishList(), true)?: [];
         $advertId = isset($data['advertId']) ? trim($data['advertId']) : null;
 
         array_push($wishList, intval($advertId));
